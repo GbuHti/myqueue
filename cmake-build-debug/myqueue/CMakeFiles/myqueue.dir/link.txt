@@ -1,2 +1,0 @@
-/Library/Developer/CommandLineTools/usr/bin/ar qc libmyqueue.a CMakeFiles/myqueue.dir/src/queue.c.o
-/Library/Developer/CommandLineTools/usr/bin/ranlib libmyqueue.a
