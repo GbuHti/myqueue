@@ -1,5 +1,9 @@
 /Applications/CLion.app/Contents/bin/cmake/mac/bin/cmake -DCMAKE_BUILD_TYPE=Debug -DCMAKE_DEPENDS_USE_COMPILER=FALSE -G "CodeBlocks - Unix Makefiles" /Users/yuzhenbo/test/myqueue
--- project source dir: /Users/yuzhenbo/test/myqueue/myqueue
--- Configuring done
--- Generating done
--- Build files have been written to: /Users/yuzhenbo/test/myqueue/cmake-build-debug
+CMake Error at CMakeLists.txt:3 (add_subdirectory):
+  add_subdirectory given source "/Users/yuzhenbo/test/myqueue/googletest"
+  which is not an existing directory.
+
+
+-- Configuring incomplete, errors occurred!
+See also "/Users/yuzhenbo/test/myqueue/cmake-build-debug/CMakeFiles/CMakeOutput.log".
+See also "/Users/yuzhenbo/test/myqueue/cmake-build-debug/CMakeFiles/CMakeError.log".

@@ -1,7 +1,6 @@
 cmake_minimum_required(VERSION 3.16)
-project(Queue)
-add_subdirectory(${PROJECT_SOURCE_DIR}/googletest)
-add_subdirectory(${PROJECT_SOURCE_DIR}/myqueue)
-add_executable(${PROJECT_NAME} main.cpp)
-target_link_libraries(${PROJECT_NAME} gtest pthread myqueue)
+project(myqueue)
+add_library(${PROJECT_NAME} src/queue.c)
+target_include_directories(${PROJECT_NAME}
+        PUBLIC ${PROJECT_SOURCE_DIR}/include)
 
