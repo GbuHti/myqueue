@@ -9,6 +9,7 @@
 ***********************************************/
 extern "C" {
 #include "queue.h"
+#include "stack.h"
 }
 #include "gtest/gtest.h"
 
@@ -18,13 +19,16 @@ class QueueTest : public ::testing::Test {
 protected:
     void SetUp() override {
         queue_ = InitQueue(SIZE);
+        stack_ = myStackCreate();
     }
 
     void TearDown() override {
         FiniQueue(queue_);
+        myStackFree(stack_);
     }
 
     Queue *queue_;
+    MyStack *stack_;
 };
 
 TEST_F(QueueTest, test01)
@@ -44,6 +48,25 @@ TEST_F(QueueTest, test02)
     while(!Empty(queue_)) {
         EXPECT_EQ(DeQueue(queue_), i++);
     }
+}
+
+TEST_F(QueueTest, test03)
+{
+    EXPECT_EQ(myStackEmpty(stack_), true);
+}
+
+TEST_F(QueueTest, test04)
+{
+    int i = 0;
+    for (i = 0; i < 8; i++) {
+        myStackPush(stack_, i);
+    }
+    EXPECT_EQ(myStackTop(stack_), --i);
+    myStackPop(stack_);
+    while (!myStackEmpty(stack_)) {
+        EXPECT_EQ(myStackPop(stack_), --i);
+    }
+    EXPECT_EQ(myStackEmpty(stack_), true);
 }
 
 int main(int argc, char **argv)
