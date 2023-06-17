@@ -12,16 +12,18 @@ typedef struct {
 } MyStack;
 
 
-MyStack* myStackCreate();
+MyStack *MyStackCreate(int capital);
 
-void myStackPush(MyStack* obj, Element x);
+void MyStackPush(MyStack* obj, Element x);
 
-int myStackPop(MyStack* obj);
+int MyStackPop(MyStack* obj);
 
-int myStackTop(MyStack* obj);
+/* 注意：栈先判空，不为空再调用此方法 */
+int MyStackTop(MyStack* obj);
 
-bool myStackEmpty(MyStack* obj);
+bool MyStackEmpty(MyStack* obj);
 
-void myStackFree(MyStack* obj);
+void MyStackFree(MyStack* obj);
 
+void PrintStack(MyStack *stack);
 #endif

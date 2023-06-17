@@ -11,6 +11,7 @@ extern "C" {
 #include "queue.h"
 #include "stack.h"
 #include "disjoint.h"
+#include "monostack.h"
 }
 #include "gtest/gtest.h"
 
@@ -20,12 +21,12 @@ class QueueTest : public ::testing::Test {
 protected:
     void SetUp() override {
         queue_ = InitQueue(SIZE);
-        stack_ = myStackCreate();
+        stack_ = MyStackCreate(10);
     }
 
     void TearDown() override {
         FiniQueue(queue_);
-        myStackFree(stack_);
+        MyStackFree(stack_);
     }
 
     Queue *queue_;
@@ -53,21 +54,21 @@ TEST_F(QueueTest, test02)
 
 TEST_F(QueueTest, test03)
 {
-    EXPECT_EQ(myStackEmpty(stack_), true);
+    EXPECT_EQ(MyStackEmpty(stack_), true);
 }
 
 TEST_F(QueueTest, test04)
 {
     int i = 0;
     for (i = 0; i < 8; i++) {
-        myStackPush(stack_, i);
+        MyStackPush(stack_, i);
     }
-    EXPECT_EQ(myStackTop(stack_), --i);
-    myStackPop(stack_);
-    while (!myStackEmpty(stack_)) {
-        EXPECT_EQ(myStackPop(stack_), --i);
+    EXPECT_EQ(MyStackTop(stack_), --i);
+    MyStackPop(stack_);
+    while (!MyStackEmpty(stack_)) {
+        EXPECT_EQ(MyStackPop(stack_), --i);
     }
-    EXPECT_EQ(myStackEmpty(stack_), true);
+    EXPECT_EQ(MyStackEmpty(stack_), true);
 }
 
 TEST_F(QueueTest, test05_disjoint_basic)
@@ -95,6 +96,15 @@ TEST_F(QueueTest, test05_disjoint_basic)
     EXPECT_EQ(find(fa, 1), find(fa, 4));
     EXPECT_NE(find(fa, 0), find(fa, 4));
 
+}
+
+TEST_F(QueueTest, test_monostack_01)
+{
+    int src[] = {3, 8, 4, 10, 13, 9, 2, 9};
+    int dst[sizeof(src)/sizeof(int)] = {};
+    int expect_dst[] = {6, 1, 4, 2, 1, 1, -1, -1};
+    GetMinDistance(src, dst, sizeof(dst)/sizeof(int));
+    EXPECT_EQ(memcmp(dst, expect_dst, sizeof(dst)/sizeof(int)), 0);
 }
 
 int main(int argc, char **argv)
